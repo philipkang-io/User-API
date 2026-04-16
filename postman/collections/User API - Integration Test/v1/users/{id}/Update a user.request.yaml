@@ -1,0 +1,25 @@
+schemaVersion: "3.0"
+type: http
+url: http://{{baseUrl}}/v1/users/:id
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  id: "5781"
+body:
+  type: text
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+examples: ./.resources/Update a user.resources/examples
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+      });
+order: 2000

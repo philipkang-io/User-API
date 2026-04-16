@@ -1,0 +1,20 @@
+schemaVersion: "3.0"
+type: http
+url: http://{{baseUrl}}/v1/users/:id
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  id: "5781"
+body:
+  type: text
+  content: ""
+examples: ./.resources/Delete a user.resources/examples
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+      });
+order: 3000

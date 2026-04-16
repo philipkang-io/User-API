@@ -1,0 +1,8 @@
+name: Stage
+values:
+  - key: baseUrl
+    value: 'https://customer-education.postmanlabs.com'
+    enabled: true
+  - key: apiKey
+    value: ''
+    enabled: true

@@ -1,0 +1,29 @@
+schemaVersion: "3.0"
+name: Register a new user
+type: http
+url: http://{{baseUrl}}/v1/users/register
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: text
+  content: |-
+    {
+      "username": "{{$randomUserName}}",
+      "password": "{{$randomPassword}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 201", function () {
+        pm.response.to.have.status(201);
+      });
+
+      const jsonData = pm.response.json();
+          pm.variables.set("username", jsonData.username);
+          pm.variables.set("id", jsonData.id);
+      const requestBody = JSON.parse(pm.request.body)
+          pm.variables.set("password", requestBody.password);    
+    language: text/javascript
+order: 1000
