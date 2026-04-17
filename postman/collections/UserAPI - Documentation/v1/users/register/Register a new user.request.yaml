@@ -1,0 +1,52 @@
+schemaVersion: "3.0"
+type: http
+description: |-
+  ## Register a New User
+
+  Creates a new user account in the system and returns an authentication token.
+
+  ### Endpoint
+
+  `POST /v1/users/register`
+
+  ### Request Body
+
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `username` | string | Yes | The desired username for the new account. Must be unique across the system. |
+  | `password` | string | Yes | The password for the new account. |
+
+  ### Responses
+
+  | Status Code | Description |
+  |-------------|-------------|
+  | `201 Created` | User registered successfully. Returns the user ID, username, and an authentication token. |
+  | `500 Internal Server Error` | An unexpected error occurred on the server. |
+
+  ### Example Success Response (201)
+
+  ```json
+  {
+    "id": 6030,
+    "username": "string",
+    "token": "string"
+  }
+  ```
+
+  ### Authentication
+
+  This endpoint requires an API key passed via the `X-API-Key` header.
+url: 'http://{{baseUrl}}/v1/users/register'
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: text
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+examples: ./.resources/Register a new user.resources/examples
+order: 1000

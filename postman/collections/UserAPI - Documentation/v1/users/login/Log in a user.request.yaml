@@ -1,0 +1,16 @@
+schemaVersion: "3.0"
+type: http
+url: http://{{baseUrl}}/v1/users/login
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: text
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+examples: ./.resources/Log in a user.resources/examples
+order: 1000
