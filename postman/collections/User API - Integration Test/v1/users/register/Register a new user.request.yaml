@@ -1,17 +1,17 @@
 schemaVersion: "3.0"
 name: Register a new user
 type: http
-url: http://{{baseUrl}}/v1/users/register
+url: "{{baseUrl}}/v1/users/register"
 method: POST
 headers:
   Content-Type: application/json
   Accept: application/json
 body:
-  type: text
+  type: json
   content: |-
     {
-      "username": "{{$randomUserName}}",
-      "password": "{{$randomPassword}}"
+      "username": "user_{{$timestamp}}",
+      "password": "P@ssw0rd123"
     }
 scripts:
   - type: afterResponse
@@ -24,6 +24,6 @@ scripts:
           pm.variables.set("username", jsonData.username);
           pm.variables.set("id", jsonData.id);
       const requestBody = JSON.parse(pm.request.body)
-          pm.variables.set("password", requestBody.password);    
+          pm.variables.set("password", requestBody.password);
     language: text/javascript
 order: 1000

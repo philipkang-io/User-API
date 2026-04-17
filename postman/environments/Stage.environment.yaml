@@ -3,6 +3,8 @@ values:
   - key: baseUrl
     value: 'https://customer-education.postmanlabs.com'
     enabled: true
+    type: default
   - key: apiKey
-    value: ''
+    value: '{{vault:api}}'
     enabled: true
+    type: secret

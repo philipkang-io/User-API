@@ -1,5 +1,5 @@
 schemaVersion: "3.0"
-url: http://{{baseUrl}}/v1/users/:id
+url: http://{{baseUrl}}:/v1/users/:id#
 method: PUT
 headers:
   - key: Content-Type

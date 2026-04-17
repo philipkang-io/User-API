@@ -1,7 +1,7 @@
 schemaVersion: "3.0"
 name: Retrieve a user
 type: http
-url: http://{{baseUrl}}/v1/users/:id
+url: "{{baseUrl}}/v1/users/:id"
 method: GET
 headers:
   Accept: application/json
@@ -12,9 +12,10 @@ body:
   content: ""
 scripts:
   - type: afterResponse
-    code: |-
+    code: |+
       pm.test("Status code is 200", function () {
         pm.response.to.have.status(200);
       });
+
     language: text/javascript
 order: 1000

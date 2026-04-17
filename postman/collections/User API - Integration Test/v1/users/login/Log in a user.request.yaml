@@ -1,13 +1,13 @@
 schemaVersion: "3.0"
 name: Log in a user
 type: http
-url: http://{{baseUrl}}/v1/users/login
+url: "{{baseUrl}}/v1/users/login"
 method: POST
 headers:
   Content-Type: application/json
   Accept: application/json
 body:
-  type: text
+  type: json
   content: |-
     {
       "username": "{{username}}",
@@ -15,9 +15,10 @@ body:
     }
 scripts:
   - type: afterResponse
-    code: |-
-      pm.test("Status code is 201", function () {
-        pm.response.to.have.status(201);
+    code: |+
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
       });
+
     language: text/javascript
 order: 1000
