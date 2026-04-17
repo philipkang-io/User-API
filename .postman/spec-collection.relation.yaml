@@ -7,3 +7,7 @@ relations:
     collection: ../postman/collections/User API - Integration Test
     syncOptions:
       syncExamples: false
+  - spec: ../contract/index.yaml
+    collection: ../postman/collections/UserAPI - Documentation
+    syncOptions:
+      syncExamples: false

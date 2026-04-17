@@ -1,0 +1,32 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/v1/users/login
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+  - key: X-API-Key
+    value: <API Key>
+    description: "Added as a part of security scheme: apikey"
+body:
+  type: text
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": 6030,
+        "username": "string",
+        "token": "string"
+      }
+order: 1000

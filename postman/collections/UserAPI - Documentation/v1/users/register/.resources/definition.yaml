@@ -1,0 +1,6 @@
+schemaVersion: "3.0"
+description: |-
+  # Register
+
+  Endpoints for user registration. Use these endpoints to create new user accounts and obtain authentication tokens for subsequent API calls.
+order: 1000

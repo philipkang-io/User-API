@@ -1,0 +1,13 @@
+schemaVersion: "3.0"
+type: http
+url: http://{{baseUrl}}/v1/users/:id
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  id: "5951"
+body:
+  type: text
+  content: ""
+examples: ./.resources/Delete a user.resources/examples
+order: 3000

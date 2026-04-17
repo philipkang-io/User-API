@@ -1,0 +1,26 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/v1/users/:id
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+  - key: X-API-Key
+    value: <API Key>
+    description: "Added as a part of security scheme: apikey"
+pathVariables:
+  id: "5951"
+body:
+  type: text
+  content: ""
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "message": "string"
+      }
+order: 3000
