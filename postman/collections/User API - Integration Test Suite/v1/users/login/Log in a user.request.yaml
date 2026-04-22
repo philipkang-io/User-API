@@ -1,0 +1,35 @@
+$kind: http-request
+name: Log in a user
+url: "{{baseUrl}}/v1/users/login"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "username": "{{username}}",
+        "password": "{{password}}"
+    }
+  $type: |-
+    {
+        "type": "object",
+        "properties": {
+            "username": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            }
+        }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: ./.resources/Log in a user.resources/examples
+order: 1000

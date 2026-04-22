@@ -1,0 +1,41 @@
+$kind: http-request
+name: Register a new user
+url: "{{baseUrl}}/v1/users/register"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "username": "{{$randomUserName}}",
+        "password": "{{$randomPassword}}"
+    }
+  $type: |-
+    {
+        "type": "object",
+        "properties": {
+            "username": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            }
+        }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      const jsonData = pm.response.json();
+          pm.variables.set("username", jsonData.username);
+          pm.variables.set("id", jsonData.id);
+      const requestBody = JSON.parse(pm.request.body)
+          pm.variables.set("password", requestBody.password); 
+    language: text/javascript
+examples: ./.resources/Register a new user.resources/examples
+order: 1000

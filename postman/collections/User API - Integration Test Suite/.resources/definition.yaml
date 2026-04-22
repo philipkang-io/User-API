@@ -1,0 +1,12 @@
+$kind: collection
+description: This is a User API for demoing V12
+variables:
+  baseUrl: /
+auth:
+  - id: b8c5c2c3-2148-48dc-9787-1c925d9c0b7d
+    type: apikey
+    name: apikey auth
+    credentials:
+      key: X-API-Key
+      value: "{{apiKey}}"
+      in: header

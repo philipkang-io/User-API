@@ -1,8 +1,0 @@
-name: Local
-values:
-  - key: baseUrl
-    value: ''
-    enabled: true
-  - key: apiKey
-    value: ''
-    enabled: true

@@ -1,10 +1,14 @@
 name: Stage
 values:
   - key: baseUrl
+    enabled: true
     value: 'https://customer-education.postmanlabs.com'
-    enabled: true
-    type: default
   - key: apiKey
-    value: '{{vault:api}}'
     enabled: true
-    type: secret
+    secret: true
+    source:
+      provider: postman
+      postman:
+        type: cloud
+        secretId: 72862907-d57b-4ff3-878e-a84fe9830b77
+        vaultId: 9051ecab-40c7-4506-a6a5-3f0684d13559

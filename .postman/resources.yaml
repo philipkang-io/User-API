@@ -1,12 +1,7 @@
 # Use this workspace to collaborate
 workspace:
-  id: effaf256-4437-43c6-9c6c-a49fb5062233
+  id: bdeda048-85ac-40cc-b8bc-4bc76f2d441f
 
 localResources:
   specs:
     - ../contract/index.yaml
-
-# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
-cloudResources:
-  collections:
-    ../postman/collections/User API - Integration Test: 52509354-2e6025f6-ef9e-4c2e-87d9-dca3f0c4b193
