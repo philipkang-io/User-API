@@ -3,10 +3,4 @@ values:
   - key: baseUrl
     value: 'https://customer-education.postmanlabs.com'
   - key: apiKey
-    secret: true
-    source:
-      provider: postman
-      postman:
-        type: cloud
-        secretId: 1e542a8a-a444-49e8-a973-1d45041e3238
-        vaultId: c72d9555-1a2d-46c4-9e51-15678a094d44
+    value: '1234'
