@@ -10,5 +10,8 @@ localResources:
 
 cloudResources:
   specs:
-    ../contract/index.yaml: 0ca6883c-fd23-4d6f-ab51-6a36dc0f89cf
-  collections: {}
+    ../contract/index.yaml: f7bfb039-0d34-40c8-82d0-f4f5cf4fd98e
+  collections:
+    ../postman/collections/User API - Integration Test Suite: 52509354-ecdf3c4e-f459-430b-89aa-d7809cb5bebe
+  environments:
+    ../postman/environments/Stage.environment.yaml: 52509354-7c78c7a8-1a03-40c9-8bae-a79af23d9489
