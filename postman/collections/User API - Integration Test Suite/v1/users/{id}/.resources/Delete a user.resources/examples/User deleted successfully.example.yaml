@@ -9,7 +9,7 @@ request:
       value: <API Key>
       description: "Added as a part of security scheme: apikey"
   pathVariables:
-    id: "8743"
+    id: "1179"
   body:
     type: text
     content: ""

@@ -3,7 +3,7 @@ description: This is a User API for demoing V12
 variables:
   baseUrl: /
 auth:
-  - id: b8c5c2c3-2148-48dc-9787-1c925d9c0b7d
+  - id: 1b07f27f-adb1-45db-8eb1-ebceca20fab2
     type: apikey
     name: apikey auth
     credentials:

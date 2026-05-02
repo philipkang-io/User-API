@@ -26,7 +26,7 @@ response:
     type: json
     content: |-
       {
-        "id": 6047,
+        "id": 3360,
         "username": "string",
         "token": "string"
       }
