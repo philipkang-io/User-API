@@ -1,5 +1,4 @@
 $kind: http-request
-name: Update a user
 url: "{{baseUrl}}/v1/users/:id"
 method: PUT
 headers:
@@ -13,7 +12,8 @@ pathVariables:
         "type": "object",
         "properties": {
           "value": {
-            "type": "integer"
+            "type": "integer",
+            "default": "<integer>"
           }
         },
         "required": [
@@ -24,23 +24,21 @@ body:
   type: json
   content: |-
     {
-        "username": "updated_{{$timestamp}}",
-        "password": "P@ssw0rd123"
+      "username": "updated_{{$timestamp}}",
+      "password": "P@ssw0rd123"
     }
   $type: |-
     {
-        "type": "object",
-        "properties": {
-            "username": {
-                "type": "string"
-            },
-            "password": {
-                "type": "string"
-            }
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
+      }
     }
-examples: ./.resources/Update a user.resources/examples
-order: 2000
 scripts:
   - type: afterResponse
     code: |-
@@ -48,3 +46,5 @@ scripts:
           pm.response.to.have.status(200);
       });
     language: text/javascript
+examples: ./.resources/Update a user.resources/examples
+order: 2000

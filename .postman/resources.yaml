@@ -5,3 +5,13 @@ workspace:
 localResources:
   specs:
     - ../contract/index.yaml
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  specs:
+    ../contract/index.yaml: 7a85d008-b1dd-45bb-a447-8693829ab6ed
+  collections:
+    ../postman/collections/User API - Integration Test Suite: 52509354-899a6e0e-6201-41a2-8151-9c518a42047f
+  environments:
+    ../postman/environments/Stage.environment.yaml: 52509354-165065bf-f895-477e-95a8-dbfed6658ba3

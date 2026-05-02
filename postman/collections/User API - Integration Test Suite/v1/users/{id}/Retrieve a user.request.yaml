@@ -1,5 +1,4 @@
 $kind: http-request
-name: Retrieve a user
 url: "{{baseUrl}}/v1/users/:id"
 method: GET
 headers:
@@ -12,7 +11,8 @@ pathVariables:
         "type": "object",
         "properties": {
           "value": {
-            "type": "integer"
+            "type": "integer",
+            "default": "<integer>"
           }
         },
         "required": [
@@ -22,8 +22,6 @@ pathVariables:
 body:
   type: text
   content: ""
-examples: ./.resources/Retrieve a user.resources/examples
-order: 1000
 scripts:
   - type: afterResponse
     code: |-
@@ -31,3 +29,5 @@ scripts:
           pm.response.to.have.status(200);
       });
     language: text/javascript
+examples: ./.resources/Retrieve a user.resources/examples
+order: 1000

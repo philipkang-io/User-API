@@ -1,5 +1,4 @@
 $kind: http-request
-name: Register a new user
 url: "{{baseUrl}}/v1/users/register"
 method: POST
 headers:
@@ -9,23 +8,21 @@ body:
   type: json
   content: |-
     {
-        "username": "{{$randomUserName}}",
-        "password": "{{$randomPassword}}"
+      "username": "{{$randomUserName}}",
+      "password": "{{$randomPassword}}"
     }
   $type: |-
     {
-        "type": "object",
-        "properties": {
-            "username": {
-                "type": "string"
-            },
-            "password": {
-                "type": "string"
-            }
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
+      }
     }
-examples: ./.resources/Register a new user.resources/examples
-order: 1000
 scripts:
   - type: afterResponse
     code: |-
@@ -39,3 +36,5 @@ scripts:
       const requestBody = JSON.parse(pm.request.body)
           pm.variables.set("password", requestBody.password); 
     language: text/javascript
+examples: ./.resources/Register a new user.resources/examples
+order: 1000

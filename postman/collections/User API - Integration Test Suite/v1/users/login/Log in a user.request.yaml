@@ -1,5 +1,4 @@
 $kind: http-request
-name: Log in a user
 url: "{{baseUrl}}/v1/users/login"
 method: POST
 headers:
@@ -9,23 +8,21 @@ body:
   type: json
   content: |-
     {
-        "username": "{{username}}",
-        "password": "{{password}}"
+      "username": "{{username}}",
+      "password": "{{password}}"
     }
   $type: |-
     {
-        "type": "object",
-        "properties": {
-            "username": {
-                "type": "string"
-            },
-            "password": {
-                "type": "string"
-            }
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
+      }
     }
-examples: ./.resources/Log in a user.resources/examples
-order: 1000
 scripts:
   - type: afterResponse
     code: |-
@@ -33,3 +30,5 @@ scripts:
           pm.response.to.have.status(201);
       });
     language: text/javascript
+examples: ./.resources/Log in a user.resources/examples
+order: 1000
