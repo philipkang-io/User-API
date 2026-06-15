@@ -2,7 +2,6 @@ openapi: 3.0.0
 info:
   title: User API
   version: 1.0.0
-  description: This is a User API for demoing V12. 
 paths:
   /v1/users/register:
     post:
@@ -62,7 +61,7 @@ paths:
           name: id
           required: true
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       responses:
         '200':
           description: Successful operation
@@ -89,7 +88,7 @@ paths:
           name: id
           required: true
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       requestBody:
         required: true
         content:
@@ -116,7 +115,7 @@ paths:
           name: id
           required: true
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       responses:
         '200':
           description: User deleted successfully
