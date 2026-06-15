@@ -2,10 +2,27 @@ openapi: 3.0.0
 info:
   title: User API
   version: 1.0.0
+  description: A simple user management API for registering, authenticating, and managing user accounts.
+  contact:
+    name: Cotality API Platform Team
+    url: https://example.com/support
+    email: api-support@example.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://customer-education.postmanlabs.com
+    description: Staging environment
+tags:
+  - name: Users
+    description: Operations for managing user accounts.
 paths:
   /v1/users/register:
     post:
-      summary: Register a new user
+      description: Creates a new user account and returns the user with an authentication token.
+      operationId: registerUser
+      tags:
+        - Users
       requestBody:
         required: true
         content:
@@ -14,7 +31,6 @@ paths:
               $ref: '#/components/schemas/UserCredentials'
       responses:
         '201':
-          description: User registered successfully
           content:
             application/json:
               schema:
@@ -27,7 +43,10 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /v1/users/login:
     post:
-      summary: Log in a user
+      description: Authenticates a user and returns the user with an authentication token.
+      operationId: loginUser
+      tags:
+        - Users
       requestBody:
         required: true
         content:
@@ -55,11 +74,15 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
   /v1/users/{id}:
     get:
-      summary: Retrieve a user
+      description: Returns a single user by their unique identifier.
+      operationId: getUserById
+      tags:
+        - Users
       parameters:
         - in: path
           name: id
-          required: true
+          required: false
+          description: The unique identifier of the user.
           schema:
             type: integer
       responses:
@@ -82,11 +105,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
     put:
-      summary: Update a user
+      description: Updates an existing user's credentials.
+      operationId: updateUser
+      tags:
+        - Users
       parameters:
         - in: path
           name: id
           required: true
+          description: The unique identifier of the user.
           schema:
             type: integer
       requestBody:
@@ -109,11 +136,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
     delete:
-      summary: Delete a user
+      description: Permanently deletes a user account.
+      operationId: deleteUser
+      tags:
+        - Users
       parameters:
         - in: path
           name: id
           required: true
+          description: The unique identifier of the user.
           schema:
             type: integer
       responses:
@@ -135,39 +166,55 @@ components:
       type: apiKey
       in: header
       name: X-API-Key
+      description: API key required in the X-API-Key header.
   schemas:
     UserId:
       type: integer
+      description: The unique identifier of a user.
     UserCredentials:
       type: object
+      description: The username and password used to register or authenticate a user.
       properties:
         username:
           type: string
+          description: The user's username.
         password:
           type: string
+          description: The user's password.
     User:
       type: object
+      description: A user account.
       properties:
         id:
-          type: integer
+          type: integerr
+          description: The unique identifier of the user.
         username:
           type: string
+          description: The user's username.
+        roles:
+          type: array
     UserWithToken:
+      description: A user account together with an authentication token.
       allOf:
         - $ref: '#/components/schemas/User'
         - type: object
           properties:
             token:
               type: string
+              description: The authentication token issued to the user.
     ErrorMessage:
       type: object
+      description: A standard error response.
       properties:
         message:
           type: string
+          description: A human-readable error message.
     SuccessMessage:
       type: object
+      description: A standard success response.
       properties:
         message:
           type: string
+          description: A human-readable success message.
 security:
-  - ApiKeyAuth: []          
+  - ApiKeyAuth: []
