@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://customer-education.postmanlabs.com
+  - url: 'https://customer-education.postmanlabs.com'
     description: Staging environment
 tags:
   - name: Users
@@ -19,8 +19,10 @@ tags:
 paths:
   /v1/users/register:
     post:
+      summary: Register a new user
       description: Creates a new user account and returns the user with an authentication token.
       operationId: registerUser
+      security: []
       tags:
         - Users
       requestBody:
@@ -31,20 +33,41 @@ paths:
               $ref: '#/components/schemas/UserCredentials'
       responses:
         '201':
+          description: User registered successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserWithToken'
+              examples:
+                newUser:
+                  value:
+                    id: 123
+                    username: johndoe
+                    roles:
+                      - user
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        '400':
+          description: Invalid registration request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                invalidPayload:
+                  value:
+                    message: Username and password are required.
         '500':
-          description: Error occurred
+          description: Internal server error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
   /v1/users/login:
     post:
+      summary: Log in a user
       description: Authenticates a user and returns the user with an authentication token.
       operationId: loginUser
+      security: []
       tags:
         - Users
       requestBody:
@@ -60,6 +83,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserWithToken'
+              examples:
+                loggedInUser:
+                  value:
+                    id: 123
+                    username: johndoe
+                    roles:
+                      - user
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        '400':
+          description: Invalid login request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                invalidPayload:
+                  value:
+                    message: Username and password are required.
         '401':
           description: Unauthorized
           content:
@@ -67,13 +108,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Error occurred
+          description: Internal server error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
   /v1/users/{id}:
     get:
+      summary: Get a user by ID
       description: Returns a single user by their unique identifier.
       operationId: getUserById
       tags:
@@ -81,17 +123,50 @@ paths:
       parameters:
         - in: path
           name: id
-          required: false
+          required: true
           description: The unique identifier of the user.
           schema:
-            type: integer
+            $ref: '#/components/schemas/UserId'
       responses:
         '200':
-          description: Successful operation
+          description: User retrieved successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              examples:
+                user:
+                  value:
+                    id: 123
+                    username: johndoe
+                    roles:
+                      - user
+        '400':
+          description: Invalid user ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                unauthorized:
+                  value:
+                    message: Missing or invalid API key.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                forbidden:
+                  value:
+                    message: You do not have permission to access this resource.
         '404':
           description: User not found
           content:
@@ -99,12 +174,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Error occurred
+          description: Internal server error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
     put:
+      summary: Update a user
       description: Updates an existing user's credentials.
       operationId: updateUser
       tags:
@@ -115,7 +191,7 @@ paths:
           required: true
           description: The unique identifier of the user.
           schema:
-            type: integer
+            $ref: '#/components/schemas/UserId'
       requestBody:
         required: true
         content:
@@ -129,13 +205,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessMessage'
+              examples:
+                updated:
+                  value:
+                    message: User updated successfully.
+        '400':
+          description: Invalid update request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                unauthorized:
+                  value:
+                    message: Missing or invalid API key.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                forbidden:
+                  value:
+                    message: You do not have permission to access this resource.
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Error occurred
+          description: Internal server error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
     delete:
+      summary: Delete a user
       description: Permanently deletes a user account.
       operationId: deleteUser
       tags:
@@ -146,7 +259,7 @@ paths:
           required: true
           description: The unique identifier of the user.
           schema:
-            type: integer
+            $ref: '#/components/schemas/UserId'
       responses:
         '200':
           description: User deleted successfully
@@ -154,8 +267,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessMessage'
+              examples:
+                deleted:
+                  value:
+                    message: User deleted successfully.
+        '400':
+          description: Invalid user ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                unauthorized:
+                  value:
+                    message: Missing or invalid API key.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+              examples:
+                forbidden:
+                  value:
+                    message: You do not have permission to access this resource.
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Error occurred
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -170,51 +319,109 @@ components:
   schemas:
     UserId:
       type: integer
+      format: int64
+      minimum: 1
       description: The unique identifier of a user.
+      example: 123
     UserCredentials:
       type: object
       description: The username and password used to register or authenticate a user.
+      required:
+        - username
+        - password
       properties:
         username:
           type: string
+          minLength: 3
+          maxLength: 50
           description: The user's username.
+          example: johndoe
         password:
           type: string
           description: The user's password.
+          format: password
+          minLength: 8
+          example: Str0ngP@ssw0rd
+      additionalProperties: false
+      example:
+        username: johndoe
+        password: Str0ngP@ssw0rd
     User:
       type: object
       description: A user account.
+      required:
+        - id
+        - username
       properties:
         id:
-          type: integerr
-          description: The unique identifier of the user.
+          $ref: '#/components/schemas/UserId'
         username:
           type: string
+          minLength: 3
+          maxLength: 50
           description: The user's username.
+          example: johndoe
         roles:
           type: array
+          description: The roles assigned to the user.
+          items:
+            type: string
+            example: user
+          example:
+            - user
+      additionalProperties: false
+      example:
+        id: 123
+        username: johndoe
+        roles:
+          - user
     UserWithToken:
       description: A user account together with an authentication token.
       allOf:
         - $ref: '#/components/schemas/User'
         - type: object
+          required:
+            - token
           properties:
             token:
               type: string
               description: The authentication token issued to the user.
+              minLength: 1
+              example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example
+          additionalProperties: false
+      example:
+        id: 123
+        username: johndoe
+        roles:
+          - user
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example
     ErrorMessage:
       type: object
       description: A standard error response.
+      required:
+        - message
       properties:
         message:
           type: string
+          minLength: 1
           description: A human-readable error message.
+          example: User not found.
+      additionalProperties: false
+      example:
+        message: User not found.
     SuccessMessage:
       type: object
       description: A standard success response.
+      required:
+        - message
       properties:
         message:
           type: string
+          minLength: 1
           description: A human-readable success message.
+          example: User updated successfully.
+      additionalProperties: false
+      example:
+        message: User updated successfully.
 security:
   - ApiKeyAuth: []
