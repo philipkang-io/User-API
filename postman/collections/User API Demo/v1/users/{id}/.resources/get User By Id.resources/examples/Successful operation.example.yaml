@@ -1,0 +1,44 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/users/:id"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: X-API-Key
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+  pathVariables:
+    - key: id
+      value: "6705"
+      description: The unique identifier of the user.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "null"
+    $type: |-
+      {
+        "description": "A user account.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integerr",
+            "description": "The unique identifier of the user."
+          },
+          "username": {
+            "type": "string",
+            "description": "The user's username."
+          },
+          "roles": {
+            "type": "array"
+          }
+        }
+      }
+order: 1000

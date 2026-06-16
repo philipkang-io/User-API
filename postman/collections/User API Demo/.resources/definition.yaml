@@ -1,0 +1,17 @@
+$kind: collection
+description: |-
+  A simple user management API for registering, authenticating, and managing user accounts.
+
+  Contact Support:
+   Name: Cotality API Platform Team
+   Email: api-support@example.com
+variables:
+  baseUrl: https://customer-education.postmanlabs.com
+auth:
+  - id: 74ad701f-7bed-468f-a5c2-89cbda3e2bda
+    type: apikey
+    name: apikey auth
+    credentials:
+      key: X-API-Key
+      value: "{{apiKey}}"
+      in: header

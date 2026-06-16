@@ -1,0 +1,47 @@
+$kind: http-request
+description: Updates an existing user's credentials.
+url: "{{baseUrl}}/v1/users/:id"
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "6705"
+    description: The unique identifier of the user.
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+  $type: |-
+    {
+      "description": "The username and password used to register or authenticate a user.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's username."
+        },
+        "password": {
+          "type": "string",
+          "description": "The user's password."
+        }
+      }
+    }
+examples: ./.resources/update User.resources/examples
+order: 2000

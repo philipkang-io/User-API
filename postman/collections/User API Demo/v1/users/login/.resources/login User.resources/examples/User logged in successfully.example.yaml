@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v1/users/login"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: X-API-Key
+      value: <API Key>
+      description: "Added as a part of security scheme: apikey"
+  body:
+    type: json
+    content: |-
+      {
+        "username": "string",
+        "password": "string"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "null"
+    $type: |-
+      {
+        "description": "A user account together with an authentication token.",
+        "allOf": [
+          {
+            "description": "A user account.",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integerr",
+                "description": "The unique identifier of the user."
+              },
+              "username": {
+                "type": "string",
+                "description": "The user's username."
+              },
+              "roles": {
+                "type": "array"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string",
+                "description": "The authentication token issued to the user."
+              }
+            }
+          }
+        ]
+      }
+order: 1000

@@ -1,0 +1,31 @@
+$kind: http-request
+description: Authenticates a user and returns the user with an authentication token.
+url: "{{baseUrl}}/v1/users/login"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "string",
+      "password": "string"
+    }
+  $type: |-
+    {
+      "description": "The username and password used to register or authenticate a user.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's username."
+        },
+        "password": {
+          "type": "string",
+          "description": "The user's password."
+        }
+      }
+    }
+examples: ./.resources/login User.resources/examples
+order: 1000
