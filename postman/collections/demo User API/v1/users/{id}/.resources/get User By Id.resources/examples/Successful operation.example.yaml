@@ -10,31 +10,35 @@ request:
       description: "Added as a part of security scheme: apikey"
   pathVariables:
     - key: id
-      value: "6705"
+      value: "7432"
       description: The unique identifier of the user.
   body:
     type: text
     content: ""
 response:
-  statusCode: 404
-  statusText: Not Found
+  statusCode: 200
+  statusText: OK
   headers:
     Content-Type: application/json
   body:
     type: json
-    content: |-
-      {
-        "message": "string"
-      }
+    content: "null"
     $type: |-
       {
-        "description": "A standard error response.",
+        "description": "A user account.",
         "type": "object",
         "properties": {
-          "message": {
+          "id": {
+            "type": "integerr",
+            "description": "The unique identifier of the user."
+          },
+          "username": {
             "type": "string",
-            "description": "A human-readable error message."
+            "description": "The user's username."
+          },
+          "roles": {
+            "type": "array"
           }
         }
       }
-order: 2000
+order: 1000

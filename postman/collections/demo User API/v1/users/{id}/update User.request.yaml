@@ -7,7 +7,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "6705"
+    value: "7432"
     description: The unique identifier of the user.
     $type: |-
       {
@@ -45,3 +45,10 @@ body:
     }
 examples: ./.resources/update User.resources/examples
 order: 2000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+      });

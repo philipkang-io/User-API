@@ -1,10 +1,8 @@
 $kind: http-example
 request:
   url: "{{baseUrl}}/v1/users/:id"
-  method: PUT
+  method: GET
   headers:
-    - key: Content-Type
-      value: application/json
     - key: Accept
       value: application/json
     - key: X-API-Key
@@ -12,15 +10,11 @@ request:
       description: "Added as a part of security scheme: apikey"
   pathVariables:
     - key: id
-      value: "6705"
+      value: "7432"
       description: The unique identifier of the user.
   body:
-    type: json
-    content: |-
-      {
-        "username": "string",
-        "password": "string"
-      }
+    type: text
+    content: ""
 response:
   statusCode: 500
   statusText: Internal Server Error
@@ -43,4 +37,4 @@ response:
           }
         }
       }
-order: 2000
+order: 3000

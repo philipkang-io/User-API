@@ -6,11 +6,11 @@
 workflows:
   syncSpecToCollection:
     - spec: ../contract/index.yaml
-      collection: ../postman/collections/User API Demo
+      collection: ../postman/collections/demo User API
       options:
         syncExamples: false
   syncCollectionToSpec:
     - spec: ../contract/index.yaml
-      collection: ../postman/collections/User API Demo
+      collection: ../postman/collections/demo User API
       options:
         syncExamples: false

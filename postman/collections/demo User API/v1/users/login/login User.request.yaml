@@ -1,6 +1,6 @@
 $kind: http-request
-description: Creates a new user account and returns the user with an authentication token.
-url: "{{baseUrl}}/v1/users/register"
+description: Authenticates a user and returns the user with an authentication token.
+url: "{{baseUrl}}/v1/users/login"
 method: POST
 headers:
   Content-Type: application/json
@@ -27,5 +27,12 @@ body:
         }
       }
     }
-examples: ./.resources/register User.resources/examples
+examples: ./.resources/login User.resources/examples
 order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+      });

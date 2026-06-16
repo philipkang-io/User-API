@@ -8,7 +8,7 @@ description: |-
 variables:
   baseUrl: https://customer-education.postmanlabs.com
 auth:
-  - id: 74ad701f-7bed-468f-a5c2-89cbda3e2bda
+  - id: d416e723-2752-4683-b0cf-1e3d210926df
     type: apikey
     name: apikey auth
     credentials:

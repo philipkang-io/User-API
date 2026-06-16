@@ -1,7 +1,7 @@
 $kind: http-example
 request:
   url: "{{baseUrl}}/v1/users/:id"
-  method: GET
+  method: DELETE
   headers:
     - key: Accept
       value: application/json
@@ -10,7 +10,7 @@ request:
       description: "Added as a part of security scheme: apikey"
   pathVariables:
     - key: id
-      value: "6705"
+      value: "7432"
       description: The unique identifier of the user.
   body:
     type: text
@@ -22,22 +22,18 @@ response:
     Content-Type: application/json
   body:
     type: json
-    content: "null"
+    content: |-
+      {
+        "message": "string"
+      }
     $type: |-
       {
-        "description": "A user account.",
+        "description": "A standard success response.",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integerr",
-            "description": "The unique identifier of the user."
-          },
-          "username": {
+          "message": {
             "type": "string",
-            "description": "The user's username."
-          },
-          "roles": {
-            "type": "array"
+            "description": "A human-readable success message."
           }
         }
       }

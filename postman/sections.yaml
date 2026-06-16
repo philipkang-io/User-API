@@ -1,0 +1,16 @@
+panels:
+  - name: uncategorized
+    panelType: 1
+    isUncategorized: true
+    items:
+      - relativePath: postman/collections/User API - Integration Test Suite-1
+        elementType: collection
+      - relativePath: postman/environments/Stage.environment.yaml
+        elementType: environment
+      - relativePath: contract/index.yaml
+        elementType: specification
+      - relativePath: postman/collections/demo User API
+        elementType: collection
+  - name: uncategorized
+    panelType: 2
+    isUncategorized: true
