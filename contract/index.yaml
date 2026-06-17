@@ -19,7 +19,6 @@ tags:
 paths:
   /v1/users/register:
     post:
-      summary: Register a new user
       description: Creates a new user account and returns the user with an authentication token.
       operationId: registerUser
       tags:
@@ -32,34 +31,18 @@ paths:
               $ref: '#/components/schemas/UserCredentials'
       responses:
         '201':
-          description: User registered successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserWithToken'
-        '400':
-          description: Invalid input - missing or invalid username/password
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '409':
-          description: User already exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Internal server error
+          description: Error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-      security:
-        - ApiKeyAuth: []
   /v1/users/login:
     post:
-      summary: Authenticate a user
       description: Authenticates a user and returns the user with an authentication token.
       operationId: loginUser
       tags:
@@ -77,29 +60,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserWithToken'
-        '400':
-          description: Invalid input - missing or invalid username/password
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
         '401':
-          description: Invalid credentials
+          description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Internal server error
+          description: Error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-      security:
-        - ApiKeyAuth: []
   /v1/users/{id}:
     get:
-      summary: Get user by ID
       description: Returns a single user by their unique identifier.
       operationId: getUserById
       tags:
@@ -107,10 +81,10 @@ paths:
       parameters:
         - in: path
           name: id
-          required: true
+          required: false
           description: The unique identifier of the user.
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       responses:
         '200':
           description: Successful operation
@@ -118,18 +92,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '401':
-          description: Unauthorized - API key required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '403':
-          description: Forbidden - insufficient permissions
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
         '404':
           description: User not found
           content:
@@ -137,15 +99,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Internal server error
+          description: Error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-      security:
-        - ApiKeyAuth: []
     put:
-      summary: Update user credentials
       description: Updates an existing user's credentials.
       operationId: updateUser
       tags:
@@ -156,7 +115,7 @@ paths:
           required: true
           description: The unique identifier of the user.
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       requestBody:
         required: true
         content:
@@ -170,40 +129,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessMessage'
-        '400':
-          description: Invalid input - missing or invalid username/password
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '401':
-          description: Unauthorized - API key required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '403':
-          description: Forbidden - insufficient permissions
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '404':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Internal server error
+          description: Error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-      security:
-        - ApiKeyAuth: []
     delete:
-      summary: Delete a user account
       description: Permanently deletes a user account.
       operationId: deleteUser
       tags:
@@ -214,7 +146,7 @@ paths:
           required: true
           description: The unique identifier of the user.
           schema:
-            $ref: '#/components/schemas/UserId'
+            type: integer
       responses:
         '200':
           description: User deleted successfully
@@ -222,120 +154,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessMessage'
-        '401':
-          description: Unauthorized - API key required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '403':
-          description: Forbidden - insufficient permissions
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        '404':
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
         '500':
-          description: Internal server error
+          description: Error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-      security:
-        - ApiKeyAuth: []
 components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: X-API-Key
-      description: API key required in the X-API-Key header for authentication and authorization.
+      description: API key required in the X-API-Key header.
   schemas:
     UserId:
       type: integer
       description: The unique identifier of a user.
-      example: 12345
     UserCredentials:
       type: object
       description: The username and password used to register or authenticate a user.
-      required:
-        - username
-        - password
       properties:
-        username:
-          type: string
-          description: The user's username (must be unique).
-          minLength: 3
-          maxLength: 50
-          example: john_doe
-        password:
-          type: string
-          description: The user's password (minimum 8 characters).
-          minLength: 8
-          maxLength: 128
-          example: SecurePassword123
-    User:
-      type: object
-      description: A user account.
-      required:
-        - id
-        - username
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the user.
-          example: 12345
         username:
           type: string
           description: The user's username.
-          example: john_doe
+        password:
+          type: string
+          description: The user's password.
+    User:
+      type: object
+      description: A user account.
+      properties:
+        id:
+          type: integerr
+          description: The unique identifier of the user.
+        username:
+          type: string
+          description: The user's username.
         roles:
           type: array
-          description: List of roles assigned to the user.
-          items:
-            type: string
-            example: user
-          example:
-            - user
-            - admin
     UserWithToken:
       description: A user account together with an authentication token.
-      required:
-        - id
-        - username
-        - token
       allOf:
         - $ref: '#/components/schemas/User'
         - type: object
           properties:
             token:
               type: string
-              description: The authentication token issued to the user (JWT format).
-              example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+              description: The authentication token issued to the user.
     ErrorMessage:
       type: object
       description: A standard error response.
-      required:
-        - message
       properties:
         message:
           type: string
           description: A human-readable error message.
-          example: Invalid credentials provided
     SuccessMessage:
       type: object
       description: A standard success response.
-      required:
-        - message
       properties:
         message:
           type: string
           description: A human-readable success message.
-          example: User updated successfully
 security:
   - ApiKeyAuth: []

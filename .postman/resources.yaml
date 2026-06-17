@@ -12,6 +12,5 @@ cloudResources:
     ../contract/index.yaml: 14e910e3-c984-47e4-b0dc-90091f8182c6
   collections:
     ../postman/collections/User API - Integration Test Suite-1: 52509354-8c517f1e-afe1-4cf4-af6e-c058172fb54b
-    ../postman/collections/demo User API: 52509354-4cacb184-2bd5-4acc-bd70-3c60c4129056
   environments:
     ../postman/environments/Stage.environment.yaml: 52509354-165065bf-f895-477e-95a8-dbfed6658ba3
