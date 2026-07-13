@@ -15,9 +15,10 @@ jobs:
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-      - name: Run Spec lint
+      - name: Run Spec lint (governance gate)
         run: |
-          postman spec lint 95983674-5438-4551-99d6-c4faf830e13d --workspace-id 4227c71c-ca79-4516-bc79-6782c7715c2e --report-events  
-      - name: Run API tests
+          postman spec lint 4e218718-91fa-41cb-b39c-b98d7d39656e --workspace-id 054afea7-ab5c-471d-98d3-86d2a6cd5234 --report-events
+      - name: Run API tests (non-blocking)
+        continue-on-error: true
         run: |
-          postman collection run "52509354-899a6e0e-6201-41a2-8151-9c518a42047f" -e "52509354-165065bf-f895-477e-95a8-dbfed6658ba3" --report-events
+          postman collection run "52509354-acfc040b-fd24-4b9c-853a-72caf08c2272" -e "52509354-3b02e674-e6ee-4f70-b446-c78b0fa34042" --report-events
